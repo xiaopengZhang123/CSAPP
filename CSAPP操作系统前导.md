@@ -235,6 +235,15 @@ $(x|-x)>>31 \Rightarrow 结果为-1$
    OF,溢出标志,发生负溢出或者正溢出的时候,这一位就会成为1
 
 
+2. 示例
+   ```cpp
+   int comp(long a,int b){
+      return a==b;
+   }
+   ```
+   
+
+
 
 
 
