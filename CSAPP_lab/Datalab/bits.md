@@ -1,6 +1,7 @@
 # 说明
 
 **只使用位运算**
+**不能使用 if-else ,while,for**
 
 ## 1. bitXor
 
@@ -85,8 +86,20 @@ int negate(int x) {
  //是否是ASCII字符
 //就是'0'--'9'
 //目前不会写,2023/11/25
+
+//会写了,虽然不是自己想出来的
+//2023/11/30写此函数
 int isAsciiDigit(int x) {
-  return 2;
+  //从题目中判断就是x是否在'0'~'9'之间,也就是0x30<=x<=0x39
+  //也就是我们可以让这个函数去做相减操作,而且得到的相减之后的结果一定是 x-0x2f的符号位是0,x-0x3a的符号位一定是负数
+        int a=0x2f+(~x+1);
+        int b=0x3a+(~x+1);
+        int d1=!!(x^0x2f);
+        int d2=!!(x^0x3a);
+        int c1=(a>>31)&0x1;
+        int c2=(b>>31)&0x1;
+        return c1&(!c2)&d1&d2;
+
 }
 
 ```
@@ -103,7 +116,13 @@ int isAsciiDigit(int x) {
  */
 //目前也不会做
 int conditional(int x, int y, int z) {
-  return 2;
+  //如果x是0，那么返回z,也就是说返回的形式上是 return c1|c2;
+  //如果x是0，那么应该返回z
+  int a=!!x;
+  int b=(a<<31)>>31;
+  //a是0的话,b就是0,~a就是1111...1111,所以就会返回z
+  //a是1的话,b就是1111...1111,会返回y
+  return (a&y)|(~a&z);
 }
 
 ```
@@ -134,6 +153,8 @@ int logicalNeg(int x) {
 }
 
 ```
+
+10. 
 
 
 
